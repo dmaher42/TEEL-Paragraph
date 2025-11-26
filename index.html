@@ -52,7 +52,7 @@
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-top: 0;
             color: var(--primary-color);
         }
@@ -68,9 +68,9 @@
         }
 
         h2 {
-            font-size: 1.8em;
+            font-size: 1.6em;
             padding-bottom: 10px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
         .training h2 {
@@ -83,7 +83,7 @@
 
         .intro-text {
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .teel-breakdown {
@@ -104,7 +104,7 @@
             font-family: var(--font-heading);
             color: var(--primary-color);
             margin-top: 0;
-            font-size: 1.5em;
+            font-size: 1.3em;
         }
 
         .teel-part p {
@@ -112,8 +112,8 @@
         }
 
         .teel-part .example {
-            margin-top: 15px;
-            padding: 10px;
+            margin-top: 10px;
+            padding: 8px;
             background-color: rgba(0, 255, 204, 0.1);
             border-left: 3px solid var(--primary-color);
             border-radius: 5px;
@@ -149,17 +149,11 @@
             padding: 15px;
             margin: 10px 0;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .objectives label:hover {
-            background-color: rgba(255, 107, 157, 0.2);
-            box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
         }
 
-        .objectives input[type="radio"] {
-            margin-right: 10px;
+        .objectives p {
+            font-size: 0.9em;
+            margin: 4px 0;
         }
 
         .lock-box {
@@ -206,29 +200,32 @@
         }
 
         button {
-            font-family: var (--font-heading);
+            font-family: var(--font-heading);
             background-color: var(--primary-color);
             color: var(--bg-color);
             border: none;
-            padding: 12px 25px;
-            font-size: 1em;
+            padding: 10px 22px;
+            font-size: 0.9em;
             font-weight: 700;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.1s;
             margin-top: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            display: inline-block;
         }
 
-        .mission button {
+        .mission button.main-btn {
             background-color: var(--secondary-color);
+        }
+
+        .button-row {
+            text-align: center;
+            margin-top: 15px;
         }
 
         button:hover {
             transform: scale(1.05);
-            filter: brightness(1.2);
+            filter: brightness(1.1);
         }
 
         button:active {
@@ -248,21 +245,22 @@
         }
 
         .checklist li {
-            margin: 10px 0;
+            margin: 8px 0;
             display: flex;
             align-items: center;
+            font-size: 0.9em;
         }
 
         .checklist input[type="checkbox"] {
-            margin-right: 15px;
-            width: 20px;
-            height: 20px;
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
             cursor: pointer;
         }
 
         #congratsMessage {
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-family: var(--font-heading);
             color: var(--secondary-color);
             margin-top: 20px;
@@ -300,10 +298,11 @@
         .game-item {
             background-color: var(--bg-color);
             border: 1px solid var(--primary-color);
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.1s;
+            font-size: 0.9em;
         }
 
         .game-item:hover:not(.correct):not(.incorrect) {
@@ -340,9 +339,10 @@
         .feedback {
             text-align: center;
             font-weight: bold;
-            min-height: 25px;
+            min-height: 20px;
             margin-top: 10px;
             transition: opacity 0.3s;
+            font-size: 0.9em;
         }
 
         .feedback.correct {
@@ -379,11 +379,12 @@
             background-color: var(--bg-color);
             border: 1px solid var(--text-color);
             color: var(--text-color);
-            padding: 10px 15px;
+            padding: 8px 12px;
             margin: 5px;
             border-radius: 5px;
             cursor: move;
             transition: opacity 0.3s;
+            font-size: 0.9em;
         }
 
         .draggable:hover {
@@ -424,7 +425,7 @@
         }
 
         .drop-zone .draggable {
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
         }
 
         .drop-zone .draggable.correct {
@@ -491,9 +492,29 @@
         }
 
         .connector-practice button.reveal-example {
-            font-size: 0.85em;
-            padding: 6px 12px;
+            font-size: 0.8em;
+            padding: 5px 10px;
             margin-top: 0;
+        }
+
+        .small-note {
+            font-size: 0.85em;
+            text-align: center;
+            margin-top: 8px;
+            color: #cfd8dc;
+        }
+
+        #wordCount {
+            font-size: 0.85em;
+            margin-top: 5px;
+            text-align: right;
+            color: #cfd8dc;
+        }
+
+        #copyMessage {
+            font-size: 0.85em;
+            text-align: center;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -503,35 +524,41 @@
         <!-- ======================= PHASE 1: TRAINING ACADEMY ======================= -->
         <div class="training" id="training">
             <h1>TEEL TRAINING ACADEMY</h1>
-            <p class="intro-text">Welcome, Agent. Before you can begin your field mission on <em>Two Wolves</em>, you must complete your training. Your goal is to master the TEEL paragraph structure.</p>
+            <p class="intro-text">
+                Welcome, Agent. In this Training Academy you will learn how to write a strong TEEL paragraph. 
+                When you are confident, you will use TEEL to explain your <em>Two Wolves</em> Bento Box.
+            </p>
 
             <h2>What is TEEL?</h2>
-            <p>TEEL is a powerful structure for writing paragraphs that are clear, focused, and well-supported. It helps you organize your ideas so your reader can easily follow your argument. TEEL stands for:</p>
+            <p>
+                TEEL is a way to build a clear paragraph. It helps you keep your ideas in order so your reader can understand your thinking.
+                TEEL stands for:
+            </p>
             
             <div class="teel-breakdown">
                 <div class="teel-part">
-                    <h3>T - Topic Sentence</h3>
-                    <p>The main idea or argument of your paragraph. It tells the reader what the paragraph is about.</p>
-                    <p class="common-words"><strong>Common Words:</strong> This essay will argue..., Clearly..., It is evident that...</p>
-                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "Ben must decide whether to protect his criminal father or tell the truth."</p>
+                    <h3>T – Topic Sentence</h3>
+                    <p>The main idea of your paragraph. It tells the reader what your paragraph will be about.</p>
+                    <p class="common-words"><strong>Common Words:</strong> One important idea is..., The main point is..., This paragraph will explain...</p>
+                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "Ben must decide whether to protect his father or tell the truth about what he has done."</p>
                 </div>
                 <div class="teel-part">
-                    <h3>E - Evidence</h3>
-                    <p>Provides proof for your topic sentence. This is a quote, a statistic, or a specific example from the text.</p>
-                    <p class="common-words"><strong>Common Words:</strong> For example..., The text states..., When the character says...</p>
-                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "My heart is a frantic drum against my ribs."</p>
+                    <h3>E – Evidence</h3>
+                    <p>Proof from the text. This is a quote or a clear description of a moment in the story.</p>
+                    <p class="common-words"><strong>Common Words:</strong> For example..., The novel states..., When Ben says...</p>
+                    <p class="example"><strong>Example:</strong> "For example, on page 76 the novel states, 'I know what Dad is doing is wrong, but I still want to believe him.'"</p>
                 </div>
                 <div class="teel-part">
-                    <h3>E - Explanation</h3>
-                    <p>Explains how your evidence supports your topic sentence. You expand on your main idea in your own words.</p>
-                    <p class="common-words"><strong>Common Words:</strong> This is because..., The author shows this by..., In other words...</p>
-                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "This physical reaction highlights the intense pressure Ben is under, making his internal battle a tangible and visceral experience for the reader."</p>
+                    <h3>E – Explanation</h3>
+                    <p>Your thinking. You explain how your evidence supports your topic sentence.</p>
+                    <p class="common-words"><strong>Common Words:</strong> This shows that..., This means..., This helps the reader see...</p>
+                    <p class="example"><strong>Example:</strong> "This shows that Ben is torn between doing the right thing and staying loyal to his father."</p>
                 </div>
                 <div class="teel-part">
-                    <h3>L - Link</h3>
-                    <p>Links your evidence back to your topic sentence. It answers the "So what?" and finishes your argument.</p>
-                    <p class="common-words"><strong>Common Words:</strong> Therefore..., As a result..., This proves that...</p>
-                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "Ultimately, this choice forces Ben to confront the darkness within his own family, proving that the story's central conflict is about more than just a crime."</p>
+                    <h3>L – Link</h3>
+                    <p>The closing idea. You link back to the topic sentence or to a bigger idea in the story.</p>
+                    <p class="common-words"><strong>Common Words:</strong> Overall..., As a result..., This proves that...</p>
+                    <p class="example"><strong>Example:</strong> "Overall, this proves that Ben's biggest challenge in the story is choosing between honesty and loyalty."</p>
                 </div>
             </div>
 
@@ -540,14 +567,14 @@
 
                 <!-- Training Task 1: Match the Word (game2) -->
                 <div class="matching-game" id="game2">
-                    <h3>Training Task 1: Match the Word</h3>
-                    <p>Click on a word or phrase on the left, then click on the TEEL part where it would most likely be used.</p>
+                    <h3>Training Task 1: Match the Phrases</h3>
+                    <p>Click on a phrase on the left, then click on the TEEL part where it would most likely be used.</p>
                     <div class="game-items">
                         <div class="column">
-                            <div class="game-item" data-answer="T">It is clear that...</div>
-                            <div class="game-item" data-answer="E">This is shown by...</div>
+                            <div class="game-item" data-answer="T">One important idea is...</div>
+                            <div class="game-item" data-answer="E">For example...</div>
                             <div class="game-item" data-answer="E">The novel states...</div>
-                            <div class="game-item" data-answer="L">As a result...</div>
+                            <div class="game-item" data-answer="L">Overall...</div>
                         </div>
                         <div class="column">
                             <div class="game-item" data-choice="T">Topic Sentence</div>
@@ -561,14 +588,14 @@
 
                 <!-- Training Task 2: Identify the Job (game5) -->
                 <div class="matching-game" id="game5">
-                    <h3>Training Task 2: Identify the Job</h3>
-                    <p>Match the description of a job to the TEEL part that performs it.</p>
+                    <h3>Training Task 2: Match the Job</h3>
+                    <p>Match the job of each sentence to the TEEL part that does that job.</p>
                     <div class="game-items">
                         <div class="column">
-                            <div class="game-item" data-answer="T">This sentence introduces the main argument of the paragraph in a clear, concise way.</div>
-                            <div class="game-item" data-answer="E">This sentence expands on the main idea, providing more detail or context.</div>
-                            <div class="game-item" data-answer="E">This sentence provides a direct quote from the text to prove a point.</div>
-                            <div class="game-item" data-answer="L">This sentence restates the main argument and connects it to a broader idea.</div>
+                            <div class="game-item" data-answer="T">This sentence tells the main point of the paragraph.</div>
+                            <div class="game-item" data-answer="E">This sentence explains the idea in more detail.</div>
+                            <div class="game-item" data-answer="E">This sentence uses a quote from the text.</div>
+                            <div class="game-item" data-answer="L">This sentence finishes the idea and links back to the main point.</div>
                         </div>
                         <div class="column">
                             <div class="game-item" data-choice="T">Topic Sentence</div>
@@ -582,14 +609,14 @@
 
                 <!-- Training Task 3: Match the Sentence (game1) -->
                 <div class="matching-game" id="game1">
-                    <h3>Training Task 3: Match the Sentence</h3>
+                    <h3>Training Task 3: Match the Sentences</h3>
                     <p>Click on a sentence on the left, then click on its correct TEEL part on the right.</p>
                     <div class="game-items">
                         <div class="column">
                             <div class="game-item" data-answer="T">Dogs make excellent pets for many families.</div>
                             <div class="game-item" data-answer="E">They provide companionship and encourage owners to exercise.</div>
                             <div class="game-item" data-answer="E">For instance, a study showed that dog owners are 30% more likely to meet daily exercise guidelines.</div>
-                            <div class="game-item" data-answer="L">Therefore, owning a dog can significantly improve a family's health.</div>
+                            <div class="game-item" data-answer="L">Therefore, owning a dog can help a family stay happy and healthy.</div>
                         </div>
                         <div class="column">
                             <div class="game-item" data-choice="T">Topic Sentence</div>
@@ -604,27 +631,27 @@
                 <!-- Training Task 4: Sort the Paragraph (game3) -->
                 <div class="drag-drop-game" id="game3">
                     <h3>Training Task 4: Sort the Paragraph</h3>
-                    <p>Drag sentences from the box below and drop them into the correct TEEL order to form a coherent paragraph.</p>
+                    <p>Drag each sentence into the correct TEEL box to build a paragraph.</p>
                     
                     <div class="drag-container" id="dragSource">
                         <div class="draggable" draggable="true" data-teel="E">For example, a cat will happily sleep on a windowsill all day while its owner is at work, whereas a dog might chew furniture out of boredom.</div>
-                        <div class="draggable" draggable="true" data-teel="L">Therefore, for people with busy lifestyles, a cat offers a much more practical and low-maintenance companionship.</div>
-                        <div class="draggable" draggable="true" data-teel="T">Cats are superior to dogs as indoor pets because they are more independent.</div>
-                        <div class="draggable" draggable="true" data-teel="E">This independence means they do not suffer from separation anxiety as much as dogs and are content to entertain themselves.</div>
+                        <div class="draggable" draggable="true" data-teel="L">Therefore, for people with busy lifestyles, a cat offers a more practical and low-maintenance pet.</div>
+                        <div class="draggable" draggable="true" data-teel="T">Cats are often better indoor pets than dogs because they are more independent.</div>
+                        <div class="draggable" draggable="true" data-teel="E">This independence means they do not suffer from separation anxiety as much as dogs and are happy to be alone.</div>
                     </div>
 
                     <div class="drop-zones">
                         <div class="drop-zone" data-teel="T">
-                            <h4>T - Topic Sentence</h4>
+                            <h4>T – Topic Sentence</h4>
                         </div>
                         <div class="drop-zone" data-teel="E">
-                            <h4>E - Evidence</h4>
+                            <h4>E – Evidence</h4>
                         </div>
                         <div class="drop-zone" data-teel="E">
-                            <h4>E - Explanation</h4>
+                            <h4>E – Explanation</h4>
                         </div>
                         <div class="drop-zone" data-teel="L">
-                            <h4>L - Link</h4>
+                            <h4>L – Link</h4>
                         </div>
                     </div>
                     <div class="feedback" id="feedback3"></div>
@@ -633,13 +660,13 @@
                 <!-- Training Task 5: Match the Quote (game4) -->
                 <div class="matching-game" id="game4">
                     <h3>Training Task 5: Match the Quote</h3>
-                    <p>Match the quote from <em>Two Wolves</em> to the TEEL part it could belong to.</p>
+                    <p>Match each sentence with the TEEL part it could belong to in a paragraph about <em>Two Wolves</em>.</p>
                     <div class="game-items">
                         <div class="column">
-                            <div class="game-item" data-answer="T">"He was my dad, but he was also a stranger."</div>
-                            <div class="game-item" data-answer="E">"This shows that Ben is torn between his loyalty to his father and his own moral compass."</div>
-                            <div class="game-item" data-answer="E">"My heart is a frantic drum against my ribs."</div>
-                            <div class="game-item" data-answer="L">"Ultimately, Ben's choices demonstrate that family is not just a source of comfort, but also of conflict."</div>
+                            <div class="game-item" data-answer="T">Ben’s biggest problem in the story is deciding who he can trust.</div>
+                            <div class="game-item" data-answer="E">“I know what Dad is doing is wrong, but I still want to believe him.”</div>
+                            <div class="game-item" data-answer="E">This shows that Ben feels pulled in two directions and is scared to accept the truth.</div>
+                            <div class="game-item" data-answer="L">Overall, this proves that trust and doubt are central ideas in Ben’s journey.</div>
                         </div>
                         <div class="column">
                             <div class="game-item" data-choice="T">Topic Sentence</div>
@@ -654,7 +681,7 @@
                 <!-- Training Task 6: TEEL Connector Practice -->
                 <div class="connector-practice" id="connectorPractice">
                     <h3>Training Task 6: TEEL Connector Practice</h3>
-                    <p style="font-size:0.9em; text-align:center;">
+                    <p class="small-note">
                         For each example, the Topic Sentence (T) and Evidence (E) are given. 
                         Your mission: write ONE Explanation sentence that clearly connects the Evidence back to the Topic Sentence.
                     </p>
@@ -662,37 +689,34 @@
                     <!-- Item 1 -->
                     <div class="connector-item">
                         <p class="connector-label">Topic Sentence (T):</p>
-                        <p>Ben must decide whether to protect his criminal father or tell the truth.</p>
+                        <p>Ben must choose between protecting his dad and doing the right thing.</p>
 
                         <p class="connector-label">Evidence (E):</p>
-                        <p>“My heart is a frantic drum against my ribs.”</p>
+                        <p>“I know what Dad is doing is wrong, but I still want to believe him.”</p>
 
                         <p class="connector-starters">
-                            Sentence starters you could use: 
-                            <br>“This quote shows that…”, “This proves that Ben…”, “Ben’s reaction shows how…”
+                            Think: How does this quote show what Ben is feeling about this decision?
                         </p>
 
                         <textarea 
-                            placeholder="Write ONE Explanation sentence that connects the quote to the big decision Ben must make..."></textarea>
+                            placeholder="Write ONE Explanation sentence that connects the quote to Ben’s difficult choice..."></textarea>
 
                         <button class="reveal-example" data-example-id="connectorEx1">SHOW EXAMPLE EXPLANATION</button>
                         <p id="connectorEx1" class="example-text">
-                            Example: This quote shows that Ben is extremely anxious about the consequences of his choice, 
-                            proving how much pressure he feels when deciding whether to protect his father or tell the truth.
+                            Example: This quote shows that Ben feels torn between the truth and his loyalty to his dad, making his decision very stressful and confusing.
                         </p>
                     </div>
 
                     <!-- Item 2 -->
                     <div class="connector-item">
                         <p class="connector-label">Topic Sentence (T):</p>
-                        <p>The isolated Australian bush setting makes Ben feel both free and unsafe.</p>
+                        <p>The Australian bush setting makes Ben feel both excited and scared.</p>
 
                         <p class="connector-label">Evidence (E):</p>
                         <p>“Every shadow looked like something waiting to move.”</p>
 
                         <p class="connector-starters">
-                            Sentence starters you could use:
-                            <br>“This shows that…”, “The author suggests that…”, “This moment reveals that…”
+                            Think: What does this quote suggest about how the setting feels to Ben?
                         </p>
 
                         <textarea 
@@ -700,22 +724,20 @@
 
                         <button class="reveal-example" data-example-id="connectorEx2">SHOW EXAMPLE EXPLANATION</button>
                         <p id="connectorEx2" class="example-text">
-                            Example: This shows that Ben feels constantly on edge in the bush, as if something dangerous is hiding nearby, 
-                            which makes the setting feel both exciting and frightening at the same time.
+                            Example: This shows that Ben feels nervous in the bush, as if danger might appear at any moment, which makes the setting feel unsafe as well as exciting.
                         </p>
                     </div>
 
                     <!-- Item 3 -->
                     <div class="connector-item">
                         <p class="connector-label">Topic Sentence (T):</p>
-                        <p>In <em>Two Wolves</em>, family loyalty is not always a positive force.</p>
+                        <p>In <em>Two Wolves</em>, family loyalty sometimes causes problems for Ben.</p>
 
                         <p class="connector-label">Evidence (E):</p>
-                        <p>“I knew what Dad was doing was wrong, but I still wanted to believe him.”</p>
+                        <p>“I knew what Dad was doing was wrong, but I still wanted to go with him.”</p>
 
                         <p class="connector-starters">
-                            Sentence starters you could use:
-                            <br>“This proves that…”, “This moment reveals that…”, “The quote shows that Ben’s loyalty…”
+                            Think: How does this line show that loyalty can be a problem for Ben?
                         </p>
 
                         <textarea 
@@ -723,158 +745,177 @@
 
                         <button class="reveal-example" data-example-id="connectorEx3">SHOW EXAMPLE EXPLANATION</button>
                         <p id="connectorEx3" class="example-text">
-                            Example: This proves that Ben’s loyalty to his father keeps him stuck in a dangerous situation, 
-                            showing that family loyalty can sometimes stop him from doing what he knows is right.
+                            Example: This proves that Ben’s loyalty to his dad pulls him into risky situations, showing that family loyalty can sometimes stop him from making safe choices.
                         </p>
                     </div>
 
-                    <p class="reflection-note">
-                        Think: if your Explanation clearly answers “How does this quote prove my Topic Sentence?”, you’ve built a strong TEEL connection.
+                    <p class="small-note">
+                        Tip: If your Explanation clearly answers “How does this quote prove my Topic Sentence?”, you have built a strong TEEL connection.
                     </p>
                 </div>
 
             </div> <!-- End of training-tasks-container -->
 
-            <button id="startFieldMissionBtn" disabled>START FIELD MISSION</button>
+            <div class="button-row">
+                <button id="startFieldMissionBtn" disabled class="main-btn">START FIELD MISSION</button>
+            </div>
         </div>
 
-        <!-- ======================= PHASE 2: FIELD MISSION ======================= -->
+        <!-- ======================= PHASE 2: FIELD MISSION – BENTO BOX PARAGRAPH ======================= -->
         <div class="mission" id="mission" style="display: none;">
-            <h1>TEEL MISSION: TWO WOLVES</h1>
-            <p class="intro-text">Excellent work, Agent. You have completed your training. Now, begin your field mission. Construct a powerful paragraph about the novel <em>Two Wolves</em>.</p>
+            <h1>TEEL MISSION: BENTO BOX PARAGRAPH</h1>
+            <p class="intro-text">
+                Great work, Agent. You have trained with TEEL. Now it is time to write your real paragraph.
+                In this mission you will write ONE TEEL paragraph to explain how your Bento Box items show a theme from <em>Two Wolves</em>.
+            </p>
 
-            <!-- SECTION 1: CHOOSE OBJECTIVE -->
+            <!-- SECTION 1: CHOOSE / WRITE THEME -->
             <div id="objective-section" class="mission-section visible">
-                <h2>Step 1: Choose Your Objective</h2>
-                <p>Select one of the following questions to answer in your paragraph. This will be the focus of your mission.</p>
+                <h2>Step 1: Your Theme</h2>
+                <p>
+                    First, choose the theme or big idea from <em>Two Wolves</em> that your Bento Box is about.
+                    Write it in the box below.
+                </p>
                 <div class="objectives">
+                    <p><strong>Examples of themes you might choose:</strong></p>
+                    <ul>
+                        <li>Family loyalty</li>
+                        <li>Honesty and truth</li>
+                        <li>Trust and betrayal</li>
+                        <li>Facing fear</li>
+                        <li>Right and wrong choices</li>
+                    </ul>
                     <label>
-                        <input type="radio" name="objective" value="1">
-                        How does Ben's internal conflict between his "good wolf" and "bad wolf" drive the main events of the novel?
-                    </label>
-                    <label>
-                        <input type="radio" name="objective" value="2">
-                        Discuss the theme of family loyalty in <em>Two Wolves</em>. Is it always a positive force?
-                    </label>
-                    <label>
-                        <input type="radio" name="objective" value="3">
-                        Why is the setting of the isolated, Australian bush so important to the story?
+                        <span>Your theme:</span><br>
+                        <input type="text" id="themeInput" style="width:100%; margin-top:5px; padding:8px; border-radius:5px; border:1px solid var(--secondary-color); background-color:var(--bg-color); color:var(--text-color);">
                     </label>
                 </div>
-                <button id="startMissionBtn" disabled>START MISSION</button>
+                <div class="button-row">
+                    <button id="startMissionBtn" disabled class="main-btn">START TEEL PARAGRAPH</button>
+                </div>
             </div>
 
             <!-- SECTION 2: T-LOCK -->
             <div id="t-lock-section" class="mission-section">
-                <h2>Step 2: The T-LOCK</h2>
+                <h2>Step 2: T – Topic Sentence</h2>
                 <div class="lock-box">
                     <h3>T is for TOPIC SENTENCE</h3>
-                    <p><strong>What it does:</strong> States the main argument of your paragraph in one clear sentence. It must answer your chosen objective.</p>
+                    <p><strong>What it does:</strong> Says your main idea in one clear sentence. It must name your theme and say that your Bento Box items show this theme.</p>
                     <p><strong>Ask yourself:</strong></p>
                     <ul>
-                        <li>What is the single most important point I want to make?</li>
-                        <li>How can I state my answer to the big question directly?</li>
+                        <li>What theme did I choose?</li>
+                        <li>How do my items help show this theme in the story?</li>
                     </ul>
-                    <p><strong>Sentence Starters:</strong></p>
-                    <ul>
-                        <li>Ben's internal conflict is the main driving force of the novel because...</li>
-                        <li>In Tristan Bancks' <em>Two Wolves</em>, the theme of family loyalty is shown to be...</li>
-                        <li>The isolated Australian bush setting is crucial as it...</li>
-                    </ul>
-                    <p><strong>Example (for a different question):</strong> "Ben's relationship with his dad is complicated, built on a foundation of secrets that eventually begins to crack."</p>
+                    <p><strong>Tip:</strong> In one sentence, say your theme and tell the reader that your items represent parts of this theme in <em>Two Wolves</em>.</p>
+                    <p><strong>Example (about loyalty):</strong> "My Bento Box shows the theme of family loyalty in <em>Two Wolves</em>, because each item represents a moment when Ben must decide whether to stand by his family or do the right thing."</p>
                 </div>
                 <textarea id="t-text" placeholder="Type your Topic Sentence here..."></textarea>
-                <button id="unlockE2Btn" disabled>UNLOCK E-LOCK 1</button>
+                <div class="button-row">
+                    <button id="unlockE2Btn" disabled class="main-btn">NEXT: E – EVIDENCE</button>
+                </div>
             </div>
 
             <!-- SECTION 3: E-LOCK 1 (Evidence) -->
             <div id="e2-lock-section" class="mission-section">
-                <h2>Step 3: The E-LOCK 1</h2>
+                <h2>Step 3: E – Evidence</h2>
                 <div class="lock-box">
                     <h3>E is for EVIDENCE</h3>
-                    <p><strong>What it does:</strong> Provides a specific quote or a detailed description of a scene from the book that proves your explanation. This is your proof.</p>
+                    <p><strong>What it does:</strong> Gives a strong quote or a clear description from the book. This proves that your theme is important in the story.</p>
                     <p><strong>Ask yourself:</strong></p>
                     <ul>
-                        <li>What is the best quote that shows this?</li>
-                        <li>What specific moment in the book can I describe in detail?</li>
+                        <li>Which moment or quote from the book matches my theme and my items?</li>
+                        <li>Can I include a page number to show where it is?</li>
                     </ul>
-                    <p><strong>Sentence Starters:</strong></p>
-                    <ul>
-                        <li>For instance, the novel states, "..."</li>
-                        <li>This is proven when the narrator describes, "..."</li>
-                        <li>A specific example of this is when...</li>
-                    </ul>
-                    <p><strong>Example:</strong> "For instance, the novel states, 'My heart is a frantic drum against my ribs. One part of me wants to run... The other part, the wolf part, wants to stay and see what happens.'"</p>
+                    <p><strong>Tip:</strong> Choose one moment that connects well to your theme and at least one of your items.</p>
+                    <p><strong>Example:</strong> "For example, on page 76 the novel states, 'I know what Dad is doing is wrong, but I still want to believe him,' which shows Ben’s struggle between truth and loyalty."</p>
                 </div>
-                <textarea id="e2-text" placeholder="Type your Evidence (with quotation marks) here..."></textarea>
-                <button id="unlockE1Btn" disabled>UNLOCK E-LOCK 2</button>
+                <textarea id="e2-text" placeholder="Type your Evidence (with quotation marks and page number) here..."></textarea>
+                <div class="button-row">
+                    <button id="unlockE1Btn" disabled class="main-btn">NEXT: E – EXPLANATION</button>
+                </div>
             </div>
 
             <!-- SECTION 4: E-LOCK 2 (Explanation) -->
             <div id="e1-lock-section" class="mission-section">
-                <h2>Step 4: The E-LOCK 2</h2>
+                <h2>Step 4: E – Explanation</h2>
                 <div class="lock-box">
                     <h3>E is for EXPLANATION</h3>
-                    <p><strong>What it does:</strong> Explains <em>how</em> or <em>why</em> your evidence supports your topic sentence. You expand on your main idea in your own words.</p>
+                    <p><strong>What it does:</strong> Explains how your evidence and your Bento Box items show the theme. This is your thinking in your own words.</p>
                     <p><strong>Ask yourself:</strong></p>
                     <ul>
-                        <li>What happens in the story that proves my point?</li>
-                        <li>Why does my topic sentence make sense?</li>
+                        <li>How does my quote or scene show this theme?</li>
+                        <li>How do my items match this moment or idea?</li>
                     </ul>
-                    <p><strong>Sentence Starters:</strong></p>
-                    <ul>
-                        <li>This is evident when...</li>
-                        <li>The author shows this through...</li>
-                        <li>Ben's feelings of... are demonstrated by...</li>
-                    </ul>
-                    <p><strong>Example:</strong> "This is shown when he finds the bag of money and has to decide whether to hide it or tell his parents, a choice that pits his desire to protect his family against his sense of right and wrong."</p>
+                    <p><strong>Tip:</strong> Try to name at least one or two items and explain how they link to the theme and the evidence.</p>
+                    <p><strong>Example:</strong> "This shows Ben is torn between doing the right thing and staying loyal to his father, just like the broken compass in my Bento Box, which represents how he feels lost about which direction to choose."</p>
                 </div>
                 <textarea id="e1-text" placeholder="Type your Explanation here..."></textarea>
-                <button id="unlockLBtn" disabled>UNLOCK L-LOCK</button>
+                <div class="button-row">
+                    <button id="unlockLBtn" disabled class="main-btn">NEXT: L – LINK</button>
+                </div>
             </div>
 
             <!-- SECTION 5: L-LOCK -->
             <div id="l-lock-section" class="mission-section">
-                <h2>Step 5: The L-LOCK</h2>
+                <h2>Step 5: L – Link</h2>
                 <div class="lock-box">
                     <h3>L is for LINK</h3>
-                    <p><strong>What it does:</strong> Links your evidence back to your topic sentence. It answers the question "So what?" and explains why your point is important.</p>
+                    <p><strong>What it does:</strong> Finishes your paragraph. It links back to your theme and shows why your items and this idea are important in <em>Two Wolves</em>.</p>
                     <p><strong>Ask yourself:</strong></p>
                     <ul>
-                        <li>How does my evidence prove my topic sentence?</li>
-                        <li>What is the bigger idea here? Why does this matter?</li>
+                        <li>What do all my items show when we look at them together?</li>
+                        <li>Why is this theme important in the story?</li>
                     </ul>
-                    <p><strong>Sentence Starters:</strong></p>
-                    <ul>
-                        <li>This proves that...</li>
-                        <li>Ultimately, this shows the reader that...</li>
-                        <li>Therefore, it is clear that...</li>
-                    </ul>
-                    <p><strong>Example:</strong> "This moment proves that Ben's internal battle is not just a feeling, but the very thing that pushes the plot forward and forces him to confront the darkness within his own family."</p>
+                    <p><strong>Tip:</strong> Zoom out. Think about the whole book, not just one scene.</p>
+                    <p><strong>Example:</strong> "Overall, these items show that family loyalty both helps and hurts Ben, proving that this theme is one of the most important ideas in <em>Two Wolves</em>."</p>
                 </div>
                 <textarea id="l-text" placeholder="Type your Linking sentence here..."></textarea>
-                <button id="assembleBtn" disabled>ASSEMBLE FINAL CODE</button>
+                <div class="button-row">
+                    <button id="assembleBtn" disabled class="main-btn">ASSEMBLE PARAGRAPH</button>
+                </div>
             </div>
             
             <!-- SECTION 6: ASSEMBLE PARAGRAPH -->
             <div id="assemble-section" class="mission-section">
-                <h2>Step 6: Assemble the Final Code</h2>
-                <p>Your paragraph has been assembled. Review it below. You can make small edits if you need to.</p>
-                <textarea id="finalParagraph" readonly></textarea>
-                <button id="debriefBtn">GO TO DEBRIEF</button>
+                <h2>Step 6: Your Full TEEL Paragraph</h2>
+                <p>
+                    Your paragraph has been built using your T, E, E and L. 
+                    Read it carefully. You can edit and improve it in the box below.
+                </p>
+                <textarea id="finalParagraph"></textarea>
+                <p id="wordCount">Word count: 0</p>
+                <div class="button-row">
+                    <button id="debriefBtn" class="main-btn">NEXT: SELF-CHECK</button>
+                </div>
             </div>
 
-            <!-- SECTION 7: DEBRIEF -->
+            <!-- SECTION 7: DEBRIEF + HAND IN -->
             <div id="debrief-section" class="mission-section">
-                <h2>Mission Debrief: Self-Review</h2>
-                <p>Before you submit your mission, complete the final checklist. Be honest.</p>
+                <h2>Step 7: Self-Check and Hand In</h2>
+                <p>Use this checklist to check your paragraph before you hand it in.</p>
                 <ul class="checklist">
-                    <li><input type="checkbox" id="check1"><label for="check1"> My paragraph starts with a clear Topic Sentence that answers the question.</label></li>
-                    <li><input type="checkbox" id="check2"><label for="check2"> I have included Evidence from the novel (a quote or a detailed scene).</label></li>
-                    <li><input type="checkbox" id="check3"><label for="check3"> I have included an Explanation in my own words.</label></li>
-                    <li><input type="checkbox" id="check4"><label for="check4"> My Linking sentence connects my evidence back to my main point.</label></li>
+                    <li><input type="checkbox" id="check1"><label for="check1"> My paragraph starts with a clear Topic Sentence that names my theme and mentions my Bento Box.</label></li>
+                    <li><input type="checkbox" id="check2"><label for="check2"> I have included Evidence from the novel (a quote or a clear scene) with a page number if possible.</label></li>
+                    <li><input type="checkbox" id="check3"><label for="check3"> I have explained how my evidence and items connect to the theme.</label></li>
+                    <li><input type="checkbox" id="check4"><label for="check4"> My last sentence links back to the theme and the story as a whole.</label></li>
                 </ul>
-                <button id="completeMissionBtn">COMPLETE MISSION</button>
+
+                <h3 style="margin-top:20px;">Hand In Your Paragraph</h3>
+                <p style="font-size:0.9em;">
+                    When your checklist is complete, use one of these options to hand in your work (follow your teacher’s instructions):
+                </p>
+                <ul class="checklist">
+                    <li>Click <strong>Copy Paragraph</strong> and paste it into our class assignment page.</li>
+                    <li>Or click <strong>Download Paragraph</strong> and upload the file where your teacher has asked.</li>
+                </ul>
+
+                <div class="button-row">
+                    <button id="copyBtn">COPY PARAGRAPH</button>
+                    <button id="downloadBtn">DOWNLOAD PARAGRAPH</button>
+                    <button id="completeMissionBtn" class="main-btn">COMPLETE MISSION</button>
+                </div>
+                <p id="copyMessage"></p>
+
                 <div id="congratsMessage">
                     🎉 MISSION ACCOMPLISHED! 🎉
                 </div>
@@ -897,7 +938,7 @@
         function enableMissionStart() {
             if (game1Complete && game2Complete && game3Complete && game4Complete && game5Complete) {
                 startFieldMissionBtn.disabled = false;
-                startFieldMissionBtn.textContent = "TRAINING COMPLETE - START FIELD MISSION";
+                startFieldMissionBtn.textContent = "TRAINING COMPLETE – START FIELD MISSION";
             }
         }
 
@@ -948,11 +989,11 @@
                                     }
                                     enableMissionStart();
                                 }
-                            }, 1000);
+                            }, 800);
                         } else {
                             firstSelection.classList.add('incorrect');
                             item.classList.add('incorrect');
-                            feedbackDiv.textContent = "Incorrect. Try again!";
+                            feedbackDiv.textContent = "Incorrect. Try again.";
                             feedbackDiv.className = 'feedback incorrect';
 
                             const firstSelectionCopy = firstSelection;
@@ -965,7 +1006,7 @@
                                 feedbackDivCopy.textContent = '';
                                 feedbackDivCopy.className = 'feedback';
                                 isProcessing = false;
-                            }, 1500);
+                            }, 1200);
                         }
                         firstSelection = null;
                     }
@@ -1013,9 +1054,9 @@
                 if (!draggable) return;
 
                 if (zone.querySelector('.draggable')) {
-                    feedback3.textContent = "This spot is already filled!";
+                    feedback3.textContent = "This spot is already filled.";
                     feedback3.className = 'feedback incorrect';
-                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 1500);
+                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 1200);
                     return;
                 }
 
@@ -1028,7 +1069,7 @@
                     correctDrops++;
                     feedback3.textContent = "Correct placement!";
                     feedback3.className = 'feedback correct';
-                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 1000);
+                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 800);
 
                     if (correctDrops === 4) {
                         game3Complete = true;
@@ -1036,14 +1077,14 @@
                     }
                 } else {
                     draggable.classList.add('incorrect');
-                    feedback3.textContent = "Incorrect placement. Try again!";
+                    feedback3.textContent = "Incorrect placement. Try again.";
                     feedback3.className = 'feedback incorrect';
                     setTimeout(() => {
                         draggable.classList.remove('incorrect');
                         document.getElementById('dragSource').appendChild(draggable);
                         feedback3.textContent = '';
                         feedback3.className='feedback';
-                    }, 1500);
+                    }, 1200);
                 }
             });
         });
@@ -1075,6 +1116,7 @@
         });
 
         // --- MISSION LOGIC ---
+        const themeInput = document.getElementById('themeInput');
         const objectiveSection = document.getElementById('objective-section');
         const tLockSection = document.getElementById('t-lock-section');
         const e2LockSection = document.getElementById('e2-lock-section');
@@ -1090,23 +1132,25 @@
         const assembleBtn = document.getElementById('assembleBtn');
         const debriefBtn = document.getElementById('debriefBtn');
         const completeMissionBtn = document.getElementById('completeMissionBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
 
         const tText = document.getElementById('t-text');
         const e2Text = document.getElementById('e2-text');
         const e1Text = document.getElementById('e1-text');
         const lText = document.getElementById('l-text');
         const finalParagraph = document.getElementById('finalParagraph');
-        
+        const wordCountEl = document.getElementById('wordCount');
+        const copyMessage = document.getElementById('copyMessage');
         const congratsMessage = document.getElementById('congratsMessage');
-        
+
         function showSection(section) {
             section.classList.add('visible');
         }
 
-        document.querySelectorAll('input[name="objective"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                startMissionBtn.disabled = false;
-            });
+        // Theme input enables Start Mission
+        themeInput.addEventListener('input', () => {
+            startMissionBtn.disabled = themeInput.value.trim() === '';
         });
 
         startMissionBtn.addEventListener('click', () => {
@@ -1145,10 +1189,23 @@
             assembleBtn.disabled = lText.value.trim() === '';
         });
 
+        function updateWordCount() {
+            const text = finalParagraph.value.trim();
+            if (text === '') {
+                wordCountEl.textContent = 'Word count: 0';
+                return;
+            }
+            const words = text.split(/\s+/).filter(Boolean);
+            wordCountEl.textContent = 'Word count: ' + words.length;
+        }
+
+        finalParagraph.addEventListener('input', updateWordCount);
+
         assembleBtn.addEventListener('click', () => {
             // T-E-E-L Assembly Order
-            let paragraph = `${tText.value} ${e2Text.value} ${e1Text.value} ${lText.value}`;
-            finalParagraph.value = paragraph;
+            let paragraph = `${tText.value.trim()} ${e2Text.value.trim()} ${e1Text.value.trim()} ${lText.value.trim()}`;
+            finalParagraph.value = paragraph.trim();
+            updateWordCount();
             showSection(assembleSection);
             assembleSection.scrollIntoView({ behavior: 'smooth' });
         });
@@ -1158,6 +1215,48 @@
             debriefSection.scrollIntoView({ behavior: 'smooth' });
         });
 
+        // Copy paragraph to clipboard
+        copyBtn.addEventListener('click', async () => {
+            const text = finalParagraph.value.trim();
+            if (!text) {
+                copyMessage.textContent = 'Please write your paragraph before copying.';
+                copyMessage.style.color = '#ff6b9d';
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(text);
+                copyMessage.textContent = 'Paragraph copied. Paste it into the place your teacher has asked.';
+                copyMessage.style.color = '#00ffcc';
+            } catch (err) {
+                copyMessage.textContent = 'Copy did not work. Please select and copy the text yourself.';
+                copyMessage.style.color = '#ff6b9d';
+            }
+        });
+
+        // Download paragraph as .txt file
+        downloadBtn.addEventListener('click', () => {
+            const text = finalParagraph.value.trim();
+            if (!text) {
+                copyMessage.textContent = 'Please write your paragraph before downloading.';
+                copyMessage.style.color = '#ff6b9d';
+                return;
+            }
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'two-wolves-bento-paragraph.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            copyMessage.textContent = 'File downloaded. Upload it where your teacher has asked.';
+            copyMessage.style.color = '#00ffcc';
+        });
+
+        // Complete mission
         completeMissionBtn.addEventListener('click', () => {
             const check1 = document.getElementById('check1').checked;
             const check2 = document.getElementById('check2').checked;
@@ -1167,7 +1266,7 @@
             if (check1 && check2 && check3 && check4) {
                 congratsMessage.style.display = 'block';
             } else {
-                alert('Agent, please complete the entire debrief checklist before finalizing the mission.');
+                alert('Agent, please finish all parts of the checklist before you complete the mission.');
             }
         });
     </script>
