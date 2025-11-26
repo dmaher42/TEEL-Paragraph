@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEEL Mission: Two Wolves</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #0a0e1a;
+            --panel-bg: #1a2332;
+            --primary-color: #00ffcc; /* Training Academy Cyan */
+            --secondary-color: #ff6b9d; /* Mission Pink */
+            --text-color: #e0e0e0;
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --correct-color: #4caf50;
+            --incorrect-color: #f44336;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 204, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--panel-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+        }
+
+        h1, h2 {
+            font-family: var(--font-heading);
+            text-align: center;
+            text-shadow: 0 0 5px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .training h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .mission h1 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .training h2 {
+            color: var(--primary-color);
+        }
+
+        .mission h2 {
+            color: var(--secondary-color);
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .teel-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .teel-part {
+            background-color: rgba(0, 255, 204, 0.05);
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .teel-part h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .teel-part p {
+            font-size: 0.9em;
+        }
+
+        .teel-part .example {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(0, 255, 204, 0.1);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .teel-part .common-words {
+            font-style: italic;
+            font-size: 0.85em;
+            background-color: rgba(0, 255, 204, 0.1);
+            padding: 5px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        
+        .mission-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            display: none; /* Hidden by default */
+        }
+
+        .mission-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        .objectives label {
+            display: block;
+            background-color: rgba(255, 107, 157, 0.1);
+            border: 1px solid var(--secondary-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .objectives label:hover {
+            background-color: rgba(255, 107, 157, 0.2);
+            box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+        }
+
+        .objectives input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .lock-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .lock-box h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .lock-box p, .lock-box li {
+            font-size: 0.95em;
+        }
+
+        .lock-box ul {
+            list-style-type: '🔹 ';
+            padding-left: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        #finalParagraph {
+            height: 200px;
+            background-color: #000;
+            color: #0f0;
+            border-color: #0f0;
+        }
+
+        button {
+            font-family: var (--font-heading);
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mission button {
+            background-color: var(--secondary-color);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #555;
+            color: #999;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        #congratsMessage {
+            text-align: center;
+            font-size: 1.5em;
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        /* --- Matching Game Styles --- */
+        .matching-game {
+            margin-top: 20px;
+            border: 1px dashed var(--primary-color);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .matching-game h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .game-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .game-item {
+            background-color: var(--bg-color);
+            border: 1px solid var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .game-item:hover:not(.correct):not(.incorrect) {
+            background-color: rgba(0, 255, 204, 0.2);
+        }
+
+        .game-item.selected {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            transform: scale(1.05);
+        }
+
+        .game-item.correct {
+            background-color: var(--correct-color);
+            color: white;
+            border-color: var(--correct-color);
+            cursor: default;
+            transform: scale(1);
+        }
+
+        .game-item.incorrect {
+            background-color: var(--incorrect-color);
+            color: white;
+            border-color: var(--incorrect-color);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .feedback {
+            text-align: center;
+            font-weight: bold;
+            min-height: 25px;
+            margin-top: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .feedback.correct {
+            color: var(--correct-color);
+        }
+
+        .feedback.incorrect {
+            color: var(--incorrect-color);
+        }
+
+        /* --- Drag and Drop Game Styles --- */
+        .drag-drop-game {
+            margin-top: 20px;
+            border: 1px dashed var(--primary-color);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .drag-drop-game h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .drag-container {
+            background-color: rgba(0,255,204,0.1);
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .draggable {
+            background-color: var(--bg-color);
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: move;
+            transition: opacity 0.3s;
+        }
+
+        .draggable:hover {
+            opacity: 0.7;
+        }
+
+        .draggable.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .drop-zone {
+            background-color: var(--bg-color);
+            border: 2px dashed var(--primary-color);
+            padding: 15px;
+            min-height: 60px;
+            border-radius: 5px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .drop-zone.drag-over {
+            background-color: rgba(0, 255, 204, 0.2);
+            border-color: var(--primary-color);
+            border-style: solid;
+        }
+
+        .drop-zone h4 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .drop-zone .draggable {
+            margin: 0 0 10px 0;
+        }
+
+        .drop-zone .draggable.correct {
+            background-color: var(--correct-color);
+            color: white;
+            border-color: var(--correct-color);
+            cursor: default;
+        }
+        
+        .drop-zone .draggable.incorrect {
+            animation: shake 0.5s;
+        }
+
+        /* --- TEEL Connector Practice Styles --- */
+        .connector-practice {
+            margin-top: 20px;
+            border: 1px dashed var(--primary-color);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .connector-practice h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .connector-item {
+            margin-bottom: 20px;
+            background-color: rgba(0, 255, 204, 0.03);
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .connector-item p {
+            font-size: 0.9em;
+            margin: 4px 0;
+        }
+
+        .connector-label {
+            font-weight: 700;
+        }
+
+        .connector-starters {
+            font-size: 0.85em;
+            font-style: italic;
+            margin-top: 5px;
+            margin-bottom: 8px;
+        }
+
+        .connector-item textarea {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .example-text {
+            font-size: 0.85em;
+            font-style: italic;
+            background-color: rgba(0, 255, 204, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 8px;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .connector-practice button.reveal-example {
+            font-size: 0.85em;
+            padding: 6px 12px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ======================= PHASE 1: TRAINING ACADEMY ======================= -->
+        <div class="training" id="training">
+            <h1>TEEL TRAINING ACADEMY</h1>
+            <p class="intro-text">Welcome, Agent. Before you can begin your field mission on <em>Two Wolves</em>, you must complete your training. Your goal is to master the TEEL paragraph structure.</p>
+
+            <h2>What is TEEL?</h2>
+            <p>TEEL is a powerful structure for writing paragraphs that are clear, focused, and well-supported. It helps you organize your ideas so your reader can easily follow your argument. TEEL stands for:</p>
+            
+            <div class="teel-breakdown">
+                <div class="teel-part">
+                    <h3>T - Topic Sentence</h3>
+                    <p>The main idea or argument of your paragraph. It tells the reader what the paragraph is about.</p>
+                    <p class="common-words"><strong>Common Words:</strong> This essay will argue..., Clearly..., It is evident that...</p>
+                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "Ben must decide whether to protect his criminal father or tell the truth."</p>
+                </div>
+                <div class="teel-part">
+                    <h3>E - Evidence</h3>
+                    <p>Provides proof for your topic sentence. This is a quote, a statistic, or a specific example from the text.</p>
+                    <p class="common-words"><strong>Common Words:</strong> For example..., The text states..., When the character says...</p>
+                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "My heart is a frantic drum against my ribs."</p>
+                </div>
+                <div class="teel-part">
+                    <h3>E - Explanation</h3>
+                    <p>Explains how your evidence supports your topic sentence. You expand on your main idea in your own words.</p>
+                    <p class="common-words"><strong>Common Words:</strong> This is because..., The author shows this by..., In other words...</p>
+                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "This physical reaction highlights the intense pressure Ben is under, making his internal battle a tangible and visceral experience for the reader."</p>
+                </div>
+                <div class="teel-part">
+                    <h3>L - Link</h3>
+                    <p>Links your evidence back to your topic sentence. It answers the "So what?" and finishes your argument.</p>
+                    <p class="common-words"><strong>Common Words:</strong> Therefore..., As a result..., This proves that...</p>
+                    <p class="example"><strong>Example from <em>Two Wolves</em>:</strong> "Ultimately, this choice forces Ben to confront the darkness within his own family, proving that the story's central conflict is about more than just a crime."</p>
+                </div>
+            </div>
+
+            <!-- Container for all training tasks in scaffolded order -->
+            <div id="training-tasks-container">
+
+                <!-- Training Task 1: Match the Word (game2) -->
+                <div class="matching-game" id="game2">
+                    <h3>Training Task 1: Match the Word</h3>
+                    <p>Click on a word or phrase on the left, then click on the TEEL part where it would most likely be used.</p>
+                    <div class="game-items">
+                        <div class="column">
+                            <div class="game-item" data-answer="T">It is clear that...</div>
+                            <div class="game-item" data-answer="E">This is shown by...</div>
+                            <div class="game-item" data-answer="E">The novel states...</div>
+                            <div class="game-item" data-answer="L">As a result...</div>
+                        </div>
+                        <div class="column">
+                            <div class="game-item" data-choice="T">Topic Sentence</div>
+                            <div class="game-item" data-choice="E">Evidence</div>
+                            <div class="game-item" data-choice="E">Explanation</div>
+                            <div class="game-item" data-choice="L">Link</div>
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+
+                <!-- Training Task 2: Identify the Job (game5) -->
+                <div class="matching-game" id="game5">
+                    <h3>Training Task 2: Identify the Job</h3>
+                    <p>Match the description of a job to the TEEL part that performs it.</p>
+                    <div class="game-items">
+                        <div class="column">
+                            <div class="game-item" data-answer="T">This sentence introduces the main argument of the paragraph in a clear, concise way.</div>
+                            <div class="game-item" data-answer="E">This sentence expands on the main idea, providing more detail or context.</div>
+                            <div class="game-item" data-answer="E">This sentence provides a direct quote from the text to prove a point.</div>
+                            <div class="game-item" data-answer="L">This sentence restates the main argument and connects it to a broader idea.</div>
+                        </div>
+                        <div class="column">
+                            <div class="game-item" data-choice="T">Topic Sentence</div>
+                            <div class="game-item" data-choice="E">Evidence</div>
+                            <div class="game-item" data-choice="E">Explanation</div>
+                            <div class="game-item" data-choice="L">Link</div>
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+
+                <!-- Training Task 3: Match the Sentence (game1) -->
+                <div class="matching-game" id="game1">
+                    <h3>Training Task 3: Match the Sentence</h3>
+                    <p>Click on a sentence on the left, then click on its correct TEEL part on the right.</p>
+                    <div class="game-items">
+                        <div class="column">
+                            <div class="game-item" data-answer="T">Dogs make excellent pets for many families.</div>
+                            <div class="game-item" data-answer="E">They provide companionship and encourage owners to exercise.</div>
+                            <div class="game-item" data-answer="E">For instance, a study showed that dog owners are 30% more likely to meet daily exercise guidelines.</div>
+                            <div class="game-item" data-answer="L">Therefore, owning a dog can significantly improve a family's health.</div>
+                        </div>
+                        <div class="column">
+                            <div class="game-item" data-choice="T">Topic Sentence</div>
+                            <div class="game-item" data-choice="E">Evidence</div>
+                            <div class="game-item" data-choice="E">Explanation</div>
+                            <div class="game-item" data-choice="L">Link</div>
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+
+                <!-- Training Task 4: Sort the Paragraph (game3) -->
+                <div class="drag-drop-game" id="game3">
+                    <h3>Training Task 4: Sort the Paragraph</h3>
+                    <p>Drag sentences from the box below and drop them into the correct TEEL order to form a coherent paragraph.</p>
+                    
+                    <div class="drag-container" id="dragSource">
+                        <div class="draggable" draggable="true" data-teel="E">For example, a cat will happily sleep on a windowsill all day while its owner is at work, whereas a dog might chew furniture out of boredom.</div>
+                        <div class="draggable" draggable="true" data-teel="L">Therefore, for people with busy lifestyles, a cat offers a much more practical and low-maintenance companionship.</div>
+                        <div class="draggable" draggable="true" data-teel="T">Cats are superior to dogs as indoor pets because they are more independent.</div>
+                        <div class="draggable" draggable="true" data-teel="E">This independence means they do not suffer from separation anxiety as much as dogs and are content to entertain themselves.</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-teel="T">
+                            <h4>T - Topic Sentence</h4>
+                        </div>
+                        <div class="drop-zone" data-teel="E">
+                            <h4>E - Evidence</h4>
+                        </div>
+                        <div class="drop-zone" data-teel="E">
+                            <h4>E - Explanation</h4>
+                        </div>
+                        <div class="drop-zone" data-teel="L">
+                            <h4>L - Link</h4>
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+
+                <!-- Training Task 5: Match the Quote (game4) -->
+                <div class="matching-game" id="game4">
+                    <h3>Training Task 5: Match the Quote</h3>
+                    <p>Match the quote from <em>Two Wolves</em> to the TEEL part it could belong to.</p>
+                    <div class="game-items">
+                        <div class="column">
+                            <div class="game-item" data-answer="T">"He was my dad, but he was also a stranger."</div>
+                            <div class="game-item" data-answer="E">"This shows that Ben is torn between his loyalty to his father and his own moral compass."</div>
+                            <div class="game-item" data-answer="E">"My heart is a frantic drum against my ribs."</div>
+                            <div class="game-item" data-answer="L">"Ultimately, Ben's choices demonstrate that family is not just a source of comfort, but also of conflict."</div>
+                        </div>
+                        <div class="column">
+                            <div class="game-item" data-choice="T">Topic Sentence</div>
+                            <div class="game-item" data-choice="E">Evidence</div>
+                            <div class="game-item" data-choice="E">Explanation</div>
+                            <div class="game-item" data-choice="L">Link</div>
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+
+                <!-- Training Task 6: TEEL Connector Practice -->
+                <div class="connector-practice" id="connectorPractice">
+                    <h3>Training Task 6: TEEL Connector Practice</h3>
+                    <p style="font-size:0.9em; text-align:center;">
+                        For each example, the Topic Sentence (T) and Evidence (E) are given. 
+                        Your mission: write ONE Explanation sentence that clearly connects the Evidence back to the Topic Sentence.
+                    </p>
+
+                    <!-- Item 1 -->
+                    <div class="connector-item">
+                        <p class="connector-label">Topic Sentence (T):</p>
+                        <p>Ben must decide whether to protect his criminal father or tell the truth.</p>
+
+                        <p class="connector-label">Evidence (E):</p>
+                        <p>“My heart is a frantic drum against my ribs.”</p>
+
+                        <p class="connector-starters">
+                            Sentence starters you could use: 
+                            <br>“This quote shows that…”, “This proves that Ben…”, “Ben’s reaction shows how…”
+                        </p>
+
+                        <textarea 
+                            placeholder="Write ONE Explanation sentence that connects the quote to the big decision Ben must make..."></textarea>
+
+                        <button class="reveal-example" data-example-id="connectorEx1">SHOW EXAMPLE EXPLANATION</button>
+                        <p id="connectorEx1" class="example-text">
+                            Example: This quote shows that Ben is extremely anxious about the consequences of his choice, 
+                            proving how much pressure he feels when deciding whether to protect his father or tell the truth.
+                        </p>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="connector-item">
+                        <p class="connector-label">Topic Sentence (T):</p>
+                        <p>The isolated Australian bush setting makes Ben feel both free and unsafe.</p>
+
+                        <p class="connector-label">Evidence (E):</p>
+                        <p>“Every shadow looked like something waiting to move.”</p>
+
+                        <p class="connector-starters">
+                            Sentence starters you could use:
+                            <br>“This shows that…”, “The author suggests that…”, “This moment reveals that…”
+                        </p>
+
+                        <textarea 
+                            placeholder="Write ONE Explanation sentence that connects the quote to how the setting feels for Ben..."></textarea>
+
+                        <button class="reveal-example" data-example-id="connectorEx2">SHOW EXAMPLE EXPLANATION</button>
+                        <p id="connectorEx2" class="example-text">
+                            Example: This shows that Ben feels constantly on edge in the bush, as if something dangerous is hiding nearby, 
+                            which makes the setting feel both exciting and frightening at the same time.
+                        </p>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="connector-item">
+                        <p class="connector-label">Topic Sentence (T):</p>
+                        <p>In <em>Two Wolves</em>, family loyalty is not always a positive force.</p>
+
+                        <p class="connector-label">Evidence (E):</p>
+                        <p>“I knew what Dad was doing was wrong, but I still wanted to believe him.”</p>
+
+                        <p class="connector-starters">
+                            Sentence starters you could use:
+                            <br>“This proves that…”, “This moment reveals that…”, “The quote shows that Ben’s loyalty…”
+                        </p>
+
+                        <textarea 
+                            placeholder="Write ONE Explanation sentence that connects the quote to the idea that loyalty can be negative..."></textarea>
+
+                        <button class="reveal-example" data-example-id="connectorEx3">SHOW EXAMPLE EXPLANATION</button>
+                        <p id="connectorEx3" class="example-text">
+                            Example: This proves that Ben’s loyalty to his father keeps him stuck in a dangerous situation, 
+                            showing that family loyalty can sometimes stop him from doing what he knows is right.
+                        </p>
+                    </div>
+
+                    <p class="reflection-note">
+                        Think: if your Explanation clearly answers “How does this quote prove my Topic Sentence?”, you’ve built a strong TEEL connection.
+                    </p>
+                </div>
+
+            </div> <!-- End of training-tasks-container -->
+
+            <button id="startFieldMissionBtn" disabled>START FIELD MISSION</button>
+        </div>
+
+        <!-- ======================= PHASE 2: FIELD MISSION ======================= -->
+        <div class="mission" id="mission" style="display: none;">
+            <h1>TEEL MISSION: TWO WOLVES</h1>
+            <p class="intro-text">Excellent work, Agent. You have completed your training. Now, begin your field mission. Construct a powerful paragraph about the novel <em>Two Wolves</em>.</p>
+
+            <!-- SECTION 1: CHOOSE OBJECTIVE -->
+            <div id="objective-section" class="mission-section visible">
+                <h2>Step 1: Choose Your Objective</h2>
+                <p>Select one of the following questions to answer in your paragraph. This will be the focus of your mission.</p>
+                <div class="objectives">
+                    <label>
+                        <input type="radio" name="objective" value="1">
+                        How does Ben's internal conflict between his "good wolf" and "bad wolf" drive the main events of the novel?
+                    </label>
+                    <label>
+                        <input type="radio" name="objective" value="2">
+                        Discuss the theme of family loyalty in <em>Two Wolves</em>. Is it always a positive force?
+                    </label>
+                    <label>
+                        <input type="radio" name="objective" value="3">
+                        Why is the setting of the isolated, Australian bush so important to the story?
+                    </label>
+                </div>
+                <button id="startMissionBtn" disabled>START MISSION</button>
+            </div>
+
+            <!-- SECTION 2: T-LOCK -->
+            <div id="t-lock-section" class="mission-section">
+                <h2>Step 2: The T-LOCK</h2>
+                <div class="lock-box">
+                    <h3>T is for TOPIC SENTENCE</h3>
+                    <p><strong>What it does:</strong> States the main argument of your paragraph in one clear sentence. It must answer your chosen objective.</p>
+                    <p><strong>Ask yourself:</strong></p>
+                    <ul>
+                        <li>What is the single most important point I want to make?</li>
+                        <li>How can I state my answer to the big question directly?</li>
+                    </ul>
+                    <p><strong>Sentence Starters:</strong></p>
+                    <ul>
+                        <li>Ben's internal conflict is the main driving force of the novel because...</li>
+                        <li>In Tristan Bancks' <em>Two Wolves</em>, the theme of family loyalty is shown to be...</li>
+                        <li>The isolated Australian bush setting is crucial as it...</li>
+                    </ul>
+                    <p><strong>Example (for a different question):</strong> "Ben's relationship with his dad is complicated, built on a foundation of secrets that eventually begins to crack."</p>
+                </div>
+                <textarea id="t-text" placeholder="Type your Topic Sentence here..."></textarea>
+                <button id="unlockE2Btn" disabled>UNLOCK E-LOCK 1</button>
+            </div>
+
+            <!-- SECTION 3: E-LOCK 1 (Evidence) -->
+            <div id="e2-lock-section" class="mission-section">
+                <h2>Step 3: The E-LOCK 1</h2>
+                <div class="lock-box">
+                    <h3>E is for EVIDENCE</h3>
+                    <p><strong>What it does:</strong> Provides a specific quote or a detailed description of a scene from the book that proves your explanation. This is your proof.</p>
+                    <p><strong>Ask yourself:</strong></p>
+                    <ul>
+                        <li>What is the best quote that shows this?</li>
+                        <li>What specific moment in the book can I describe in detail?</li>
+                    </ul>
+                    <p><strong>Sentence Starters:</strong></p>
+                    <ul>
+                        <li>For instance, the novel states, "..."</li>
+                        <li>This is proven when the narrator describes, "..."</li>
+                        <li>A specific example of this is when...</li>
+                    </ul>
+                    <p><strong>Example:</strong> "For instance, the novel states, 'My heart is a frantic drum against my ribs. One part of me wants to run... The other part, the wolf part, wants to stay and see what happens.'"</p>
+                </div>
+                <textarea id="e2-text" placeholder="Type your Evidence (with quotation marks) here..."></textarea>
+                <button id="unlockE1Btn" disabled>UNLOCK E-LOCK 2</button>
+            </div>
+
+            <!-- SECTION 4: E-LOCK 2 (Explanation) -->
+            <div id="e1-lock-section" class="mission-section">
+                <h2>Step 4: The E-LOCK 2</h2>
+                <div class="lock-box">
+                    <h3>E is for EXPLANATION</h3>
+                    <p><strong>What it does:</strong> Explains <em>how</em> or <em>why</em> your evidence supports your topic sentence. You expand on your main idea in your own words.</p>
+                    <p><strong>Ask yourself:</strong></p>
+                    <ul>
+                        <li>What happens in the story that proves my point?</li>
+                        <li>Why does my topic sentence make sense?</li>
+                    </ul>
+                    <p><strong>Sentence Starters:</strong></p>
+                    <ul>
+                        <li>This is evident when...</li>
+                        <li>The author shows this through...</li>
+                        <li>Ben's feelings of... are demonstrated by...</li>
+                    </ul>
+                    <p><strong>Example:</strong> "This is shown when he finds the bag of money and has to decide whether to hide it or tell his parents, a choice that pits his desire to protect his family against his sense of right and wrong."</p>
+                </div>
+                <textarea id="e1-text" placeholder="Type your Explanation here..."></textarea>
+                <button id="unlockLBtn" disabled>UNLOCK L-LOCK</button>
+            </div>
+
+            <!-- SECTION 5: L-LOCK -->
+            <div id="l-lock-section" class="mission-section">
+                <h2>Step 5: The L-LOCK</h2>
+                <div class="lock-box">
+                    <h3>L is for LINK</h3>
+                    <p><strong>What it does:</strong> Links your evidence back to your topic sentence. It answers the question "So what?" and explains why your point is important.</p>
+                    <p><strong>Ask yourself:</strong></p>
+                    <ul>
+                        <li>How does my evidence prove my topic sentence?</li>
+                        <li>What is the bigger idea here? Why does this matter?</li>
+                    </ul>
+                    <p><strong>Sentence Starters:</strong></p>
+                    <ul>
+                        <li>This proves that...</li>
+                        <li>Ultimately, this shows the reader that...</li>
+                        <li>Therefore, it is clear that...</li>
+                    </ul>
+                    <p><strong>Example:</strong> "This moment proves that Ben's internal battle is not just a feeling, but the very thing that pushes the plot forward and forces him to confront the darkness within his own family."</p>
+                </div>
+                <textarea id="l-text" placeholder="Type your Linking sentence here..."></textarea>
+                <button id="assembleBtn" disabled>ASSEMBLE FINAL CODE</button>
+            </div>
+            
+            <!-- SECTION 6: ASSEMBLE PARAGRAPH -->
+            <div id="assemble-section" class="mission-section">
+                <h2>Step 6: Assemble the Final Code</h2>
+                <p>Your paragraph has been assembled. Review it below. You can make small edits if you need to.</p>
+                <textarea id="finalParagraph" readonly></textarea>
+                <button id="debriefBtn">GO TO DEBRIEF</button>
+            </div>
+
+            <!-- SECTION 7: DEBRIEF -->
+            <div id="debrief-section" class="mission-section">
+                <h2>Mission Debrief: Self-Review</h2>
+                <p>Before you submit your mission, complete the final checklist. Be honest.</p>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="check1"><label for="check1"> My paragraph starts with a clear Topic Sentence that answers the question.</label></li>
+                    <li><input type="checkbox" id="check2"><label for="check2"> I have included Evidence from the novel (a quote or a detailed scene).</label></li>
+                    <li><input type="checkbox" id="check3"><label for="check3"> I have included an Explanation in my own words.</label></li>
+                    <li><input type="checkbox" id="check4"><label for="check4"> My Linking sentence connects my evidence back to my main point.</label></li>
+                </ul>
+                <button id="completeMissionBtn">COMPLETE MISSION</button>
+                <div id="congratsMessage">
+                    🎉 MISSION ACCOMPLISHED! 🎉
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- TRAINING ACADEMY LOGIC ---
+        const trainingSection = document.getElementById('training');
+        const missionSection = document.getElementById('mission');
+        const startFieldMissionBtn = document.getElementById('startFieldMissionBtn');
+
+        let game1Complete = false;
+        let game2Complete = false;
+        let game3Complete = false;
+        let game4Complete = false;
+        let game5Complete = false;
+
+        function enableMissionStart() {
+            if (game1Complete && game2Complete && game3Complete && game4Complete && game5Complete) {
+                startFieldMissionBtn.disabled = false;
+                startFieldMissionBtn.textContent = "TRAINING COMPLETE - START FIELD MISSION";
+            }
+        }
+
+        // --- Game 1, 2, 4, 5 Logic (Matching) ---
+        function setupGame(gameId) {
+            const gameItems = document.querySelectorAll(`#${gameId} .game-item`);
+            const feedbackDiv = document.getElementById(`feedback${gameId.slice(-1)}`);
+            let firstSelection = null;
+            let correctMatches = 0;
+            let isProcessing = false;
+
+            gameItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (isProcessing || item.classList.contains('correct')) return;
+
+                    if (!firstSelection) {
+                        firstSelection = item;
+                        item.classList.add('selected');
+                    } else {
+                        if (firstSelection === item) {
+                            item.classList.remove('selected');
+                            firstSelection = null;
+                            return;
+                        }
+                        
+                        isProcessing = true;
+                        const isCorrect = firstSelection.dataset.answer === item.dataset.choice;
+
+                        if (isCorrect) {
+                            firstSelection.classList.remove('selected');
+                            item.classList.remove('selected');
+                            firstSelection.classList.add('correct');
+                            item.classList.add('correct');
+                            correctMatches++;
+
+                            feedbackDiv.textContent = "Correct match!";
+                            feedbackDiv.className = 'feedback correct';
+                            setTimeout(() => {
+                                feedbackDiv.textContent = '';
+                                feedbackDiv.className = 'feedback';
+                                isProcessing = false;
+                                if (correctMatches === 4) {
+                                    switch (gameId) {
+                                        case 'game1': game1Complete = true; break;
+                                        case 'game2': game2Complete = true; break;
+                                        case 'game4': game4Complete = true; break;
+                                        case 'game5': game5Complete = true; break;
+                                    }
+                                    enableMissionStart();
+                                }
+                            }, 1000);
+                        } else {
+                            firstSelection.classList.add('incorrect');
+                            item.classList.add('incorrect');
+                            feedbackDiv.textContent = "Incorrect. Try again!";
+                            feedbackDiv.className = 'feedback incorrect';
+
+                            const firstSelectionCopy = firstSelection;
+                            const itemCopy = item;
+                            const feedbackDivCopy = feedbackDiv;
+
+                            setTimeout(() => {
+                                firstSelectionCopy.classList.remove('selected', 'incorrect');
+                                itemCopy.classList.remove('incorrect');
+                                feedbackDivCopy.textContent = '';
+                                feedbackDivCopy.className = 'feedback';
+                                isProcessing = false;
+                            }, 1500);
+                        }
+                        firstSelection = null;
+                    }
+                });
+            });
+        }
+
+        // Set up matching games
+        setupGame('game1');
+        setupGame('game2');
+        setupGame('game4');
+        setupGame('game5');
+
+        // --- Game 3 Logic (Drag and Drop) ---
+        const draggables = document.querySelectorAll('#game3 .draggable');
+        const dropZones = document.querySelectorAll('#game3 .drop-zone');
+        const feedback3 = document.getElementById('feedback3');
+        let correctDrops = 0;
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                
+                const draggable = document.querySelector('.dragging');
+                if (!draggable) return;
+
+                if (zone.querySelector('.draggable')) {
+                    feedback3.textContent = "This spot is already filled!";
+                    feedback3.className = 'feedback incorrect';
+                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 1500);
+                    return;
+                }
+
+                const isCorrect = draggable.dataset.teel === zone.dataset.teel;
+                zone.appendChild(draggable);
+
+                if (isCorrect) {
+                    draggable.classList.add('correct');
+                    draggable.draggable = false;
+                    correctDrops++;
+                    feedback3.textContent = "Correct placement!";
+                    feedback3.className = 'feedback correct';
+                    setTimeout(() => { feedback3.textContent = ''; feedback3.className='feedback'; }, 1000);
+
+                    if (correctDrops === 4) {
+                        game3Complete = true;
+                        enableMissionStart();
+                    }
+                } else {
+                    draggable.classList.add('incorrect');
+                    feedback3.textContent = "Incorrect placement. Try again!";
+                    feedback3.className = 'feedback incorrect';
+                    setTimeout(() => {
+                        draggable.classList.remove('incorrect');
+                        document.getElementById('dragSource').appendChild(draggable);
+                        feedback3.textContent = '';
+                        feedback3.className='feedback';
+                    }, 1500);
+                }
+            });
+        });
+
+        // --- TEEL Connector Practice: Show/Hide Example Explanations ---
+        document.querySelectorAll('.reveal-example').forEach(button => {
+            button.addEventListener('click', () => {
+                const exampleId = button.getAttribute('data-example-id');
+                const exampleEl = document.getElementById(exampleId);
+                if (!exampleEl) return;
+
+                const isHidden = exampleEl.style.display === '' || exampleEl.style.display === 'none';
+
+                if (isHidden) {
+                    exampleEl.style.display = 'block';
+                    button.textContent = 'HIDE EXAMPLE EXPLANATION';
+                } else {
+                    exampleEl.style.display = 'none';
+                    button.textContent = 'SHOW EXAMPLE EXPLANATION';
+                }
+            });
+        });
+
+        // --- Transition to Mission ---
+        startFieldMissionBtn.addEventListener('click', () => {
+            trainingSection.style.display = 'none';
+            missionSection.style.display = 'block';
+            missionSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // --- MISSION LOGIC ---
+        const objectiveSection = document.getElementById('objective-section');
+        const tLockSection = document.getElementById('t-lock-section');
+        const e2LockSection = document.getElementById('e2-lock-section');
+        const e1LockSection = document.getElementById('e1-lock-section');
+        const lLockSection = document.getElementById('l-lock-section');
+        const assembleSection = document.getElementById('assemble-section');
+        const debriefSection = document.getElementById('debrief-section');
+
+        const startMissionBtn = document.getElementById('startMissionBtn');
+        const unlockE2Btn = document.getElementById('unlockE2Btn');
+        const unlockE1Btn = document.getElementById('unlockE1Btn');
+        const unlockLBtn = document.getElementById('unlockLBtn');
+        const assembleBtn = document.getElementById('assembleBtn');
+        const debriefBtn = document.getElementById('debriefBtn');
+        const completeMissionBtn = document.getElementById('completeMissionBtn');
+
+        const tText = document.getElementById('t-text');
+        const e2Text = document.getElementById('e2-text');
+        const e1Text = document.getElementById('e1-text');
+        const lText = document.getElementById('l-text');
+        const finalParagraph = document.getElementById('finalParagraph');
+        
+        const congratsMessage = document.getElementById('congratsMessage');
+        
+        function showSection(section) {
+            section.classList.add('visible');
+        }
+
+        document.querySelectorAll('input[name="objective"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                startMissionBtn.disabled = false;
+            });
+        });
+
+        startMissionBtn.addEventListener('click', () => {
+            showSection(tLockSection);
+            tLockSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        tText.addEventListener('input', () => {
+            unlockE2Btn.disabled = tText.value.trim() === '';
+        });
+
+        unlockE2Btn.addEventListener('click', () => {
+            showSection(e2LockSection);
+            e2LockSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        e2Text.addEventListener('input', () => {
+            unlockE1Btn.disabled = e2Text.value.trim() === '';
+        });
+
+        unlockE1Btn.addEventListener('click', () => {
+            showSection(e1LockSection);
+            e1LockSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        e1Text.addEventListener('input', () => {
+            unlockLBtn.disabled = e1Text.value.trim() === '';
+        });
+
+        unlockLBtn.addEventListener('click', () => {
+            showSection(lLockSection);
+            lLockSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        lText.addEventListener('input', () => {
+            assembleBtn.disabled = lText.value.trim() === '';
+        });
+
+        assembleBtn.addEventListener('click', () => {
+            // T-E-E-L Assembly Order
+            let paragraph = `${tText.value} ${e2Text.value} ${e1Text.value} ${lText.value}`;
+            finalParagraph.value = paragraph;
+            showSection(assembleSection);
+            assembleSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        debriefBtn.addEventListener('click', () => {
+            showSection(debriefSection);
+            debriefSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        completeMissionBtn.addEventListener('click', () => {
+            const check1 = document.getElementById('check1').checked;
+            const check2 = document.getElementById('check2').checked;
+            const check3 = document.getElementById('check3').checked;
+            const check4 = document.getElementById('check4').checked;
+
+            if (check1 && check2 && check3 && check4) {
+                congratsMessage.style.display = 'block';
+            } else {
+                alert('Agent, please complete the entire debrief checklist before finalizing the mission.');
+            }
+        });
+    </script>
+</body>
+</html>
