@@ -1274,6 +1274,8 @@
             let paragraph = `${tText.value.trim()} ${e2Text.value.trim()} ${e1Text.value.trim()} ${lText.value.trim()}`;
             finalParagraph.value = paragraph.trim();
             updateWordCount();
+            // Save assembled paragraph to localStorage
+            localStorage.setItem('tw-final', finalParagraph.value);
             showSection(assembleSection);
             assembleSection.scrollIntoView({ behavior: 'smooth' });
         });
