@@ -86,6 +86,69 @@
             font-size: 1em;
         }
 
+        .progress-card {
+            margin: 20px 0 30px;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(0, 255, 204, 0.22);
+            border-radius: 16px;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        .progress-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .progress-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .progress-count {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary-color), #78fff1);
+            transition: width 0.35s ease;
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            font-size: 0.92rem;
+            color: #d5e8ea;
+        }
+
+        .progress-meta span:last-child {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
         .teel-breakdown {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -521,6 +584,20 @@
 <body>
 
     <div class="container">
+        <div class="progress-card" aria-label="Lesson progress">
+            <div class="progress-head">
+                <div class="progress-title">Lesson Progress</div>
+                <div class="progress-count" id="progressCount">1 / 11</div>
+            </div>
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="1">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-meta">
+                <span id="trainingProgress">Training: 0/5 complete</span>
+                <span id="paragraphProgress">Paragraph: Step 1/6 - Choose a topic</span>
+            </div>
+        </div>
+
         <!-- ======================= PHASE 1: TRAINING ACADEMY ======================= -->
         <div class="training" id="training">
             <h1>TEEL PARAGRAPH BUILDER</h1>
@@ -894,18 +971,44 @@
         const trainingSection = document.getElementById('training');
         const missionSection = document.getElementById('mission');
         const startFieldMissionBtn = document.getElementById('startFieldMissionBtn');
+        const progressCount = document.getElementById('progressCount');
+        const progressFill = document.getElementById('progressFill');
+        const trainingProgress = document.getElementById('trainingProgress');
+        const paragraphProgress = document.getElementById('paragraphProgress');
 
         let game1Complete = false;
         let game2Complete = false;
         let game3Complete = false;
         let game4Complete = false;
         let game5Complete = false;
+        let currentParagraphStage = 1;
+
+        const paragraphStageLabels = {
+            1: 'Choose a topic',
+            2: 'T - Topic Sentence',
+            3: 'E - Evidence',
+            4: 'E - Explanation',
+            5: 'L - Link',
+            6: 'Review and submit'
+        };
+
+        function updateProgressTracker() {
+            const trainingCompleteCount = [game1Complete, game2Complete, game3Complete, game4Complete, game5Complete].filter(Boolean).length;
+            const overallProgress = Math.min(trainingCompleteCount + currentParagraphStage, 11);
+
+            progressCount.textContent = `${overallProgress} / 11`;
+            progressFill.style.width = `${(overallProgress / 11) * 100}%`;
+            progressFill.parentElement.setAttribute('aria-valuenow', String(overallProgress));
+            trainingProgress.textContent = `Training: ${trainingCompleteCount}/5 complete`;
+            paragraphProgress.textContent = `Paragraph: Step ${currentParagraphStage}/6 - ${paragraphStageLabels[currentParagraphStage]}`;
+        }
 
         function enableMissionStart() {
             if (game1Complete && game2Complete && game3Complete && game4Complete && game5Complete) {
                 startFieldMissionBtn.disabled = false;
                 startFieldMissionBtn.textContent = "TRAINING COMPLETE - START TEEL PRACTICE";
             }
+            updateProgressTracker();
         }
 
         // --- Game 1, 2, 4, 5 Logic (Matching) ---
@@ -1078,6 +1181,8 @@
         startFieldMissionBtn.addEventListener('click', () => {
             trainingSection.style.display = 'none';
             missionSection.style.display = 'block';
+            currentParagraphStage = 2;
+            updateProgressTracker();
             missionSection.scrollIntoView({ behavior: 'smooth' });
         });
 
@@ -1175,8 +1280,29 @@
             updateWordCount();
         }
 
+        updateProgressTracker();
+
         function showSection(section) {
+            [objectiveSection, tLockSection, e2LockSection, e1LockSection, lLockSection, assembleSection, debriefSection].forEach(s => {
+                s.classList.remove('visible');
+            });
             section.classList.add('visible');
+
+            if (section === objectiveSection) {
+                currentParagraphStage = 1;
+            } else if (section === tLockSection) {
+                currentParagraphStage = 2;
+            } else if (section === e2LockSection) {
+                currentParagraphStage = 3;
+            } else if (section === e1LockSection) {
+                currentParagraphStage = 4;
+            } else if (section === lLockSection) {
+                currentParagraphStage = 5;
+            } else {
+                currentParagraphStage = 6;
+            }
+
+            updateProgressTracker();
         }
 
         // Theme input enables Start Mission
