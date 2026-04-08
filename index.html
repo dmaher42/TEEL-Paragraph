@@ -587,9 +587,9 @@
         <div class="progress-card" aria-label="Lesson progress">
             <div class="progress-head">
                 <div class="progress-title">Lesson Progress</div>
-                <div class="progress-count" id="progressCount">1 / 11</div>
+                <div class="progress-count" id="progressCount">0 / 11</div>
             </div>
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="1">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="progress-meta">
@@ -994,7 +994,8 @@
 
         function updateProgressTracker() {
             const trainingCompleteCount = [game1Complete, game2Complete, game3Complete, game4Complete, game5Complete].filter(Boolean).length;
-            const overallProgress = Math.min(trainingCompleteCount + currentParagraphStage, 11);
+            const paragraphCompleteCount = Math.max(0, currentParagraphStage - 1);
+            const overallProgress = Math.min(trainingCompleteCount + paragraphCompleteCount, 11);
 
             progressCount.textContent = `${overallProgress} / 11`;
             progressFill.style.width = `${(overallProgress / 11) * 100}%`;
@@ -1219,12 +1220,12 @@
 
         // Map field IDs to storage keys
         const autosaveMap = {
-            themeInput: 'tw-theme',
-            't-text': 'tw-t',
-            'e2-text': 'tw-e2',
-            'e1-text': 'tw-e1',
-            'l-text': 'tw-l',
-            finalParagraph: 'tw-final'
+            themeInput: 'teel-theme',
+            't-text': 'teel-t',
+            'e2-text': 'teel-e2',
+            'e1-text': 'teel-e1',
+            'l-text': 'teel-l',
+            finalParagraph: 'teel-final'
         };
 
         // Restore saved values on load
@@ -1364,7 +1365,7 @@
             finalParagraph.value = paragraph.trim();
             updateWordCount();
             // Save assembled paragraph to localStorage
-            localStorage.setItem('tw-final', finalParagraph.value);
+            localStorage.setItem('teel-final', finalParagraph.value);
             showSection(assembleSection);
             assembleSection.scrollIntoView({ behavior: 'smooth' });
         });
